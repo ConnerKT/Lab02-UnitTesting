@@ -1,8 +1,7 @@
 ﻿class Numbersgame
 {
     public static decimal Balance;
-    public static string Error = "Error you enter an Invalid Amount";
-    
+
     static void Main(string[] args)
     {
         UserInterface();
@@ -27,18 +26,18 @@
             }
             if (input == "2")
             {
-                Console.WriteLine("How much would you like to Withdraw");
+                Console.WriteLine("How much would you like to Withdraw?");
                 decimal amount = Convert.ToDecimal(Console.ReadLine());
                 decimal result = Withdraw(amount);
-                if (result == Error)
-                {
-
-                }
+                Console.WriteLine("Money has been withdrawed..");
                 Console.WriteLine("$" + result);
             }
             if (input == "3")
             {
-                decimal result = Deposit();
+                Console.WriteLine("How much would you like to Deposit?");
+                decimal amount = Convert.ToDecimal(Console.ReadLine());
+                decimal result = Deposit(amount);
+                Console.WriteLine("Deposited");
                 Console.WriteLine("$" + result);
             }
             if (input == "4")
@@ -55,13 +54,30 @@
     {
         if (amount > Balance)
         {
-            return Error
+            throw new Exception("Your amount is greater than the Balance");
+        } else if (amount == 0)
+        {
+            throw new Exception("You can't subtract 0...");
+        } else if(Balance == 0)
+        {
+            throw new Exception("Your Balance is zero, please deposit before withdrawing...");
+        }else
+        {
+            Balance -= amount;
         }
-        Balance - amount;
+
         return Balance;
     }
-    public static decimal Deposit()
+    public static decimal Deposit(decimal amount)
     {
+        if (amount < 0)
+        {
+            throw new Exception("You can't deposit a negative amount of money");
+        }
+        else {
+            Balance += amount;
+        }
+    
         return Balance;
     }
 }
