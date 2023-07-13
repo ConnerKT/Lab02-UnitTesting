@@ -1,4 +1,5 @@
-﻿class Numbersgame
+﻿namespace ATM {
+public class Numbersgame
 {
     public static decimal Balance;
 
@@ -80,4 +81,5 @@
     
         return Balance;
     }
+}
 }
