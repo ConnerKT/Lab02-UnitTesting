@@ -9,7 +9,7 @@ namespace UnitTest
         [InlineData(20)]
         public void BalanceDoesReturnBalance(decimal value)
         {
-            
+            Numbersgame.Balance = 0;
             Numbersgame.Deposit(value);
             decimal Balance = Numbersgame.ViewBalance();
             Assert.Equal(value, Numbersgame.ViewBalance());
@@ -38,6 +38,20 @@ namespace UnitTest
             Numbersgame.Balance = 0;
             Numbersgame.Deposit(value);
             Assert.Throws<Exception>(() => Numbersgame.Withdraw(withdrawAmount));
+        }
+        [Theory]
+        [InlineData(-10)]
+        public void DepositNegativeFails(decimal value)
+        {
+            Numbersgame.Balance = 0;
+            Assert.Throws<Exception>(() => Numbersgame.Deposit(value));
+        }
+        [Theory]
+        [InlineData(20)]
+        public void DepositFunctions(decimal value)
+        {
+            Numbersgame.Balance = 0;
+            Assert.Equal(20, Numbersgame.Deposit(value));
         }
 
     }
